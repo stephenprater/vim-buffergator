@@ -1,3 +1,103 @@
+buffergator.vim (/Users/stephenprater/.homesick/repos/stephenprater/vim_config/home/.vim/vundle/vim-buffergator/plugin/buffergator.vim)
+.vimrc (/Users/stephenprater/.vimrc)
+detail?name=chromedriver_mac_21.0.1180.4.zip&can=2&q= (/Users/stephenprater/detail?name=chromedriver_mac_21.0.1180.4.zip&can=2&q=)
+buffergator.txt (/Users/stephenprater/.homesick/repos/stephenprater/vim_config/home/.vim/vundle/vim-buffergator/doc/buffergator.txt)
+git-rebase-todo (/Users/stephenprater/.homesick/repos/stephenprater/vim_config/home/.vim/vundle/vim-buffergator/.git/rebase-merge/git-rebase-todo)
+git-rebase-todo (/Users/stephenprater/.vim/vundle/vim-buffergator/.git/rebase-merge/git-rebase-todo)
+COMMIT_EDITMSG (/Users/stephenprater/.homesick/repos/stephenprater/vim_config/home/.vim/vundle/vim-buffergator/.git/COMMIT_EDITMSG)
+tagbar.vim (/Users/stephenprater/.homesick/repos/stephenprater/vim_config/home/.vim/vundle/tagbar/plugin/tagbar.vim)
+mvim (/private/tmp/homebrew-macvim-7.3-64-prater-OcU3/b4winckler-macvim-d8524b9/src/MacVim/mvim)
+debugger-ide.rb (/Users/stephenprater/Code/debugger-ide/lib/debugger-ide.rb)
+tagbar.vim (/Users/stephenprater/.homesick/repos/stephenprater/vim_config/home/.vim/vundle/tagbar/autoload/tagbar.vim)
+Powerline.vim (/Users/stephenprater/.homesick/repos/stephenprater/vim_config/home/.vim/vundle/vim-powerline/plugin/Powerline.vim)
+context.rb (/Users/stephenprater/Code/debugger-ide/lib/debugger-ide/context.rb)
+test_application.rb (/Users/stephenprater/Code/debugger-ide/test/test_application.rb)
+version.rb (/Users/stephenprater/Code/debugger-ide/lib/debugger-ide/version.rb)
+ide_processor.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/ide_processor.rb)
+kernel.rb (/Users/stephenprater/Code/debugger-ide/lib/debugger-ide/kernel.rb)
+debugger.rb (/Users/stephenprater/Code/debugger-ide/lib/debugger-ide/debugger.rb)
+debugger-ide (/Users/stephenprater/Code/debugger-ide/bin/debugger-ide)
+exception.rb (/Users/stephenprater/Code/debugger-ide/lib/debugger-ide/exception.rb)
+ruby-debug-ide.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide.rb)
+debugger-ide.gemspec (/Users/stephenprater/Code/debugger-ide/debugger-ide.gemspec)
+Gemfile (/Users/stephenprater/Code/debugger-ide/Gemfile)
+rdebug-ide (/Users/stephenprater/Code/ruby-debug-ide/bin/rdebug-ide)
+mkrf_conf.rb (/Users/stephenprater/Code/ruby-debug-ide/ext/mkrf_conf.rb)
+command.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/command.rb)
+starter.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/multiprocess/starter.rb)
+pre_child.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/multiprocess/pre_child.rb)
+monkey.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/multiprocess/monkey.rb)
+frame.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/commands/frame.rb)
+eval.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/commands/eval.rb)
+enable.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/commands/enable.rb)
+control.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/commands/control.rb)
+catchpoint.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/commands/catchpoint.rb)
+breakpoints.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/commands/breakpoints.rb)
+event_processor.rb (/Users/stephenprater/Code/ruby-debug-ide/lib/ruby-debug-ide/event_processor.rb)
+Gemfile.lock (/Users/stephenprater/Documents/personal/gadgetsalvage/Gemfile.lock)
+ruby-debug-ide.gemspec (/Users/stephenprater/Code/ruby-debug-ide/ruby-debug-ide.gemspec)
+Gemfile (/Users/stephenprater/Code/ruby-debug-ide/Gemfile)
+Gemfile (/Users/stephenprater/Documents/personal/gadgetsalvage/Gemfile)
+server.rb (/Users/stephenprater/Code/pry-vim/lib/pry-vim/server.rb)
+pry-vim.rb (/Users/stephenprater/Code/pry-vim/lib/pry-vim.rb)
+version.rb (/Users/stephenprater/Code/pry-vim/lib/pry-vim/version.rb)
+pry-vim (/Users/stephenprater/Code/pry-vim/bin/pry-vim)
+cli.rb (/Users/stephenprater/Code/pry-vim/lib/pry-vim/cli.rb)
+zshecl72310 (/tmp/zshecl72310)
+zshecl5513 (/tmp/zshecl5513)
+macvim.rb (/usr/local/Library/Formula/macvim.rb)
+vim_pry.vim (/Users/stephenprater/Code/vim-pry/autoload/vim_pry.vim)
+vim_pry.rb (/Users/stephenprater/Code/vim-pry/plugin/ruby/vim_pry.rb)
+pry-vim.gemspec (/Users/stephenprater/Code/pry-vim/pry-vim.gemspec)
+Gemfile (/Users/stephenprater/Code/pry-vim/Gemfile)
+client.rb (/Users/stephenprater/Code/vim-pry/plugin/ruby/lib/client.rb)
+input_proxy.rb (/Users/stephenprater/Code/vim-pry/plugin/ruby/lib/input_proxy.rb)
+system.rb (/Users/stephenprater/Code/vim-pry/plugin/ruby/lib/system.rb)
+vim-pry.vim (/Users/stephenprater/Code/vim-pry/autoload/vim-pry.vim)
+ruby_debugger.vim (/Users/stephenprater/Code/vim-ruby-debugger/autoload/ruby_debugger.vim)
+ruby_debugger.vim (/Users/stephenprater/Code/vim-ruby-debugger/plugin/ruby_debugger.vim)
+_modifier_group_row.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/modifier_groups/_modifier_group_row.erb)
+new_field_line.js.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/modifier_groups/new_field_line.js.erb)
+_select_box.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/modifier_groups/_select_box.erb)
+show.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/modifier_groups/show.html.erb)
+new.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/modifier_groups/new.html.erb)
+index.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/modifier_groups/index.html.erb)
+edit.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/modifier_groups/edit.html.erb)
+modifier_groups_controller.rb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/controllers/modifier_groups_controller.rb)
+gadget.rb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/models/gadget.rb)
+_gadget_template_row.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/gadgets/_gadget_template_row.html.erb)
+_gadget.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/gadgets/_gadget.html.erb)
+gadget_template.rb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/models/gadget_template.rb)
+gadgets_controller.rb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/controllers/gadgets_controller.rb)
+index.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/gadgets/index.html.erb)
+gadget.js.coffee (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/javascripts/application/gadget.js.coffee)
+admin.css.sass (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/stylesheets/admin.css.sass)
+index.js.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/gadgets/index.js.erb)
+_index.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/gadgets/_index.html.erb)
+gadget_admin.js.coffee (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/javascripts/admin/gadget_admin.js.coffee)
+counties.js.coffee (/Users/stephenprater/Documents/personal/pots/app/assets/javascripts/counties.js.coffee)
+application.js (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/javascripts/application.js)
+gadget.css.sass (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/stylesheets/gadget.css.sass)
+admin_menu.css.sass (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/stylesheets/admin_menu.css.sass)
+all.js (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/javascripts/all.js)
+index.html.erb (/Users/stephenprater/Sites/agrport/app/views/admin/products/index.html.erb)
+_form.html.erb (/Users/stephenprater/Sites/agrport/app/views/admin/products/_form.html.erb)
+index.js.erb (/Users/stephenprater/Sites/agrport/app/views/admin/products/index.js.erb)
+_product.html.erb (/Users/stephenprater/Sites/agrport/app/views/admin/products/_product.html.erb)
+application_helper.rb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/helpers/application_helper.rb)
+application_helper.rb (/Users/stephenprater/Sites/agrport/app/helpers/application_helper.rb)
+remote_link_renderer.rb (/Users/stephenprater/Documents/personal/gadgetsalvage/lib/remote_link_renderer.rb)
+remote_link_renderer.rb (/Users/stephenprater/Sites/agrport/lib/remote_link_renderer.rb)
+schema.rb (/Users/stephenprater/Documents/personal/gadgetsalvage/db/schema.rb)
+products_controller.rb (/Users/stephenprater/Sites/agrport/app/controllers/admin/products_controller.rb)
+_subcategory.html.erb (/Users/stephenprater/Sites/agrport/app/views/admin/categories/_subcategory.html.erb)
+_category_heirarchy.html.erb (/Users/stephenprater/Sites/agrport/app/views/admin/categories/_category_heirarchy.html.erb)
+index.html.erb (/Users/stephenprater/Sites/agrport/app/views/admin/categories/index.html.erb)
+_url_rewrite.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/shared/_url_rewrite.html.erb)
+application.css (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/stylesheets/application.css)
+_upload.html.erb (/Users/stephenprater/Documents/personal/gadgetsalvage/app/views/gadgets/_upload.html.erb)
+mod_editing.css.sass (/Users/stephenprater/Documents/personal/gadgetsalvage/app/assets/stylesheets/mod_editing.css.sass)
+application.rb (/Users/stephenprater/Documents/personal/gadgetsalvage/config/application.rb)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""  Buffergator
 ""
@@ -436,9 +536,45 @@ function! s:NewCatalogViewer(name, title)
     let l:catalog_viewer["columns_expanded"] = 0
     let l:catalog_viewer["lines_expanded"] = 0
     let l:catalog_viewer["max_buffer_basename_len"] = 30
+    let l:catalog_viewer["buffers_catalog"] = {}
+    let l:catalog_viewer["current_buffer_index"] = -1
 
     " Initialize object state.
     let l:catalog_viewer["bufnum"] = -1
+
+    " Opens the buffer for viewing, creating it if needed.
+    " First argument, if given, should be false if the buffers info is *not*
+    " to be repopulated; defaults to 1
+    " Second argument, if given, should be number of calling window.
+    function! l:catalog_viewer.open(...) dict
+        echomsg "opening buffer" 
+        " populate data
+        if (a:0 == 0 || a:1 > 0)
+            call self.update_buffers_info()
+        endif
+        " store calling buffer
+        if (a:0 >= 2 && a:2)
+            let self.calling_bufnum = a:2
+        else
+            let self.calling_bufnum = bufnr("%")
+        endif
+        " get buffer number of the catalog view buffer, creating it if neccessary
+        if self.bufnum < 0 || !bufexists(self.bufnum)
+            " create and render a new buffer
+            call self.create_buffer()
+        else
+            " buffer exists: activate a viewport on it according to the
+            " spawning mode, re-rendering the buffer with the catalog if needed
+            call self.activate_viewport()
+            call self.render_buffer()
+            " if (a:0 > 0 && a:1) || b:buffergator_catalog_viewer != self
+            "     call self.render_buffer()
+            " else
+            "     " search for calling buffer number in jump map,
+            "     " when found, go to that line
+            " endif
+        endif
+    endfunction
 
     function! l:catalog_viewer.line_symbols(bufinfo) dict
       let l:line_symbols = ""
@@ -555,9 +691,40 @@ function! s:NewCatalogViewer(name, title)
         endif
     endfunction
 
+    function! l:catalog_viewer.render_entry(bufinfo) dict
+        let l:bufinfo = a:bufinfo
+
+        if self.calling_bufnum == l:bufinfo.bufnum
+            let l:initial_line = line("$")
+        endif
+
+        if l:bufinfo.is_current
+          let self.current_buffer_index = line("$")
+        endif
+
+        let l:bufnum_str = s:_format_filled(l:bufinfo.bufnum, 3, 1, 0)
+        let l:line = "[" . l:bufnum_str . "]"
+       
+        let l:line .= s:_format_filled(self.line_symbols(l:bufinfo),4,-1,0)
+        
+        if self.display_regime == "basename"
+            let l:line .= s:_format_align_left(l:bufinfo.basename, self.max_buffer_basename_len, " ")
+            let l:line .= "  "
+            let l:line .= l:bufinfo.parentdir
+        elseif self.display_regime == "filepath"
+            let l:line .= l:bufinfo.filepath
+        elseif self.display_regime == "bufname"
+            let l:line .= l:bufinfo.bufname
+        else
+            throw s:_buffergator_messenger.format_exception("Invalid display regime: '" . self.display_regime . "'")
+        endif
+        return l:line
+    endfunction
+
     " Creates a new buffer, renders and opens it.
     function! l:catalog_viewer.create_buffer() dict
         " get a new buf reference
+        echomsg "trying to claim" . self.bufname
         let self.bufnum = bufnr(self.bufname, 1)
         " get a viewport onto it
         call self.activate_viewport()
@@ -839,6 +1006,25 @@ function! s:NewCatalogViewer(name, title)
         endif
     endfunction
 
+    " switch to the claimed buffer - return 0 if it's not visibls
+    " 1 if the switch was succesful and -1 if no switch was necessary
+    function! l:catalog_viewer.switch_to_buffer() dict
+       echomsg "switch to " . self.bufname . " # " . self.bufnum
+       if bufwinnr(self.bufnum) < 0
+         echomsg "couldn't switch to" . self.bufname
+         return 0 
+       endif
+
+       if self.bufnum != bufnr("%")
+         echomsg "switched to " . self.bufname
+         execute bufwinnr(self.bufnum) . "wincmd w"
+         return 1 
+       endif
+      
+       echomsg("already switched")
+       return -1 
+    endfunction
+
     " Finds next occurrence of specified pattern.
     function! l:catalog_viewer.goto_pattern(pattern, direction) dict range
         if a:direction == "b" || a:direction == "p"
@@ -975,9 +1161,6 @@ function! s:NewCatalogViewer(name, title)
     function! l:catalog_viewer.update_buffers_info() dict
     endfunction
 
-    function! l:catalog_viewer.open(...) dict
-    endfunction
-
     function! l:catalog_viewer.setup_buffer_syntax() dict
     endfunction
 
@@ -1006,48 +1189,27 @@ function! s:NewBufferCatalogViewer()
     " initialize
     let l:catalog_viewer = s:NewCatalogViewer("[[buffergator-buffers]]", "buffergator")
     let l:catalog_viewer["calling_bufnum"] = -1
-    let l:catalog_viewer["buffers_catalog"] = {}
-    let l:catalog_viewer["current_buffer_index"] = -1
 
     " Populates the buffer list
     function! l:catalog_viewer.update_buffers_info() dict
         let self.buffers_catalog = self.list_buffers()
         return self.buffers_catalog
-    endfunction
+      endfunction
 
-    " Opens the buffer for viewing, creating it if needed.
-    " First argument, if given, should be false if the buffers info is *not*
-    " to be repopulated; defaults to 1
-    " Second argument, if given, should be number of calling window.
-    function! l:catalog_viewer.open(...) dict
-        " populate data
-        if (a:0 == 0 || a:1 > 0)
-            call self.update_buffers_info()
-        endif
-        " store calling buffer
-        if (a:0 >= 2 && a:2)
-            let self.calling_bufnum = a:2
-        else
-            let self.calling_bufnum = bufnr("%")
-        endif
-        " get buffer number of the catalog view buffer, creating it if neccessary
-        if self.bufnum < 0 || !bufexists(self.bufnum)
-            " create and render a new buffer
-            call self.create_buffer()
-        else
-            " buffer exists: activate a viewport on it according to the
-            " spawning mode, re-rendering the buffer with the catalog if needed
-            call self.activate_viewport()
-            call self.render_buffer()
-            " if (a:0 > 0 && a:1) || b:buffergator_catalog_viewer != self
-            "     call self.render_buffer()
-            " else
-            "     " search for calling buffer number in jump map,
-            "     " when found, go to that line
-            " endif
-        endif
-    endfunction
+    " find buffers in our catalog with matching properties
+    function! l:catalog_viewer.find_buffer(property, value) dict
+      let l:results = []
 
+      for l:index in range(0, len(self.buffers_catalog) - 1)
+        let l:buffer = self.buffers_catalog[l:index]
+        if l:buffer[a:property] == a:value
+          let l:r_buffer = copy(l:buffer)
+          let l:r_buffer['index'] = l:index
+          call add(l:results, l:r_buffer)
+        endif
+      endfor
+      return l:results
+    endfunction
 
     " Sets buffer syntax.
     function! l:catalog_viewer.setup_buffer_syntax() dict
@@ -1093,7 +1255,7 @@ function! s:NewBufferCatalogViewer()
       endfunction
 
     " Sets buffer key maps.
-    function! l:catalog_viewer.setup_buffer_keymaps() dict
+    function! l:catalog_viewer.setup_buffer_keymaps() dict "{{{
 
         call self.disable_editing_keymaps()
 
@@ -1188,7 +1350,7 @@ function! s:NewBufferCatalogViewer()
         " other
         noremap <buffer> <silent> A           :call b:buffergator_catalog_viewer.toggle_zoom()<CR>
 
-    endfunction
+    endfunction "}}}
 
     " Populates the buffer with the catalog index.
     function! l:catalog_viewer.render_buffer() dict
@@ -1199,31 +1361,8 @@ function! s:NewBufferCatalogViewer()
         let self.jump_map = {}
         let l:initial_line = 1
         for l:bufinfo in self.buffers_catalog
-            if self.calling_bufnum == l:bufinfo.bufnum
-                let l:initial_line = line("$")
-            endif
-
-            if l:bufinfo.is_current
-              let self.current_buffer_index = line("$")
-            endif
-
-            let l:bufnum_str = s:_format_filled(l:bufinfo.bufnum, 3, 1, 0)
-            let l:line = "[" . l:bufnum_str . "]"
-           
-            let l:line .= s:_format_filled(self.line_symbols(l:bufinfo),4,-1,0)
-            
-            if self.display_regime == "basename"
-                let l:line .= s:_format_align_left(l:bufinfo.basename, self.max_buffer_basename_len, " ")
-                let l:line .= "  "
-                let l:line .= l:bufinfo.parentdir
-            elseif self.display_regime == "filepath"
-                let l:line .= l:bufinfo.filepath
-            elseif self.display_regime == "bufname"
-                let l:line .= l:bufinfo.bufname
-            else
-                throw s:_buffergator_messenger.format_exception("Invalid display regime: '" . self.display_regime . "'")
-            endif
-            call self.append_line(l:line, l:bufinfo.bufnum)
+          let l:line = self.render_entry(l:bufinfo)
+          call self.append_line(l:line, l:bufinfo.bufnum)
         endfor
         let b:buffergator_last_render_time = localtime()
         try
@@ -1233,7 +1372,6 @@ function! s:NewBufferCatalogViewer()
         endtry
         setlocal nomodifiable
         call cursor(l:initial_line, 1)
-        " call self.goto_index_entry("n", 0, 1)
     endfunction
 
     " Visits the specified buffer in the previous window, if it is already
@@ -1510,27 +1648,8 @@ function! s:NewTabCatalogViewer()
 
     " initialize
     let l:catalog_viewer = s:NewCatalogViewer("[[buffergator-tabs]]", "buffergator")
+    let l:catalog_viewer["catalog_viewer"] = s:_catalog_viewer
     let l:catalog_viewer["tab_catalog"] = []
-
-    " Opens the buffer for viewing, creating it if needed.
-    " First argument, if given, should be false if the buffers info is *not*
-    " to be repopulated; defaults to 1
-    function! l:catalog_viewer.open(...) dict
-        " populate data
-        if (a:0 == 0 || a:1 > 0)
-            call self.update_buffers_info()
-        endif
-        " get buffer number of the catalog view buffer, creating it if neccessary
-        if self.bufnum < 0 || !bufexists(self.bufnum)
-            " create and render a new buffer
-            call self.create_buffer()
-        else
-            " buffer exists: activate a viewport on it according to the
-            " spawning mode, re-rendering the buffer with the catalog if needed
-            call self.activate_viewport()
-            call self.render_buffer()
-        endif
-    endfunction
 
     " Populates the buffer list
     function! l:catalog_viewer.update_buffers_info() dict
@@ -1541,7 +1660,7 @@ function! s:NewTabCatalogViewer()
         return self.tab_catalog
     endfunction
 
-    " Populates the buffer with the catalog index.
+    " Populates the buffer with the catalog entries, sorted by tab.
     function! l:catalog_viewer.render_buffer() dict
         setlocal modifiable
         let l:cur_tab_num = tabpagenr()
@@ -1550,34 +1669,23 @@ function! s:NewTabCatalogViewer()
         call self.setup_buffer_syntax()
         let self.jump_map = {}
         let l:initial_line = 1
-        for l:tidx in range(len(self.tab_catalog))
-            let l:tabinfo = self.tab_catalog[tidx]
-            if l:cur_tab_num - 1 == l:tidx
+        for l:tab_index in range(len(self.tab_catalog))
+            " start in the current tabe
+            let l:tabinfo = self.tab_catalog[tab_index]
+            if l:cur_tab_num - 1 == l:tab_index
                 let l:initial_line = line("$")
             endif
-            " let l:tabfield = "==== Tab Page [" . string(l:tidx+1) . "] ===="
-            let l:tabfield = "TAB PAGE " . string(l:tidx+1) . ":"
-            call self.append_line(l:tabfield, l:tidx+1, 1)
-            for widx in range(len(l:tabinfo))
-                let l:tabbufnum = l:tabinfo[widx]
-                let l:tabbufname = bufname(l:tabbufnum)
-                let subline = "[" . s:_format_filled(l:tabbufnum, 3, 1, 0) . "] "
-                if getbufvar(l:tabbufnum, "&mod") == 1
-                    let subline .= "+ "
-                else
-                    let subline .= "  "
+
+            let l:tabfield = "TAB PAGE " . string(l:tab_index+1) . ":"
+            call self.append_line(l:tabfield, l:tab_index+1, 1)
+            
+            for l:window_index in range(len(l:tabinfo))
+                let l:tabbufnum = l:tabinfo[l:window_index]
+                let l:bufinfo = get(self.catalog_viewer.find_buffer('bufnum',l:tabbufnum),0,{})
+                if l:bufinfo != {}
+                  let l:subline = self.render_entry(l:bufinfo)
+                  call self.append_line(l:subline, l:tab_index+1, l:window_index+1)
                 endif
-                if self.display_regime == "basename"
-                    let l:subline .= s:_format_align_left(fnamemodify(l:tabbufname, ":t"), 30, " ")
-                    let l:subline .= fnamemodify(l:tabbufname, ":p:h")
-                elseif self.display_regime == "filepath"
-                    let l:subline .= fnamemodify(l:tabbufname, ":p")
-                elseif self.display_regime == "bufname"
-                    let l:subline .= l:tabbufname
-                else
-                    throw s:_buffergator_messenger.format_exception("Invalid display regime: '" . self.display_regime . "'")
-                endif
-                call self.append_line(l:subline, l:tidx+1, l:widx+1)
             endfor
         endfor
         let b:buffergator_last_render_time = localtime()
@@ -1587,38 +1695,14 @@ function! s:NewTabCatalogViewer()
         catch //
         endtry
         setlocal nomodifiable
-        call cursor(l:initial_line, 1)
-        " call self.goto_index_entry("n", 0, 1)
+      call cursor(l:initial_line, 1)
     endfunction
 
-    function! l:catalog_viewer.setup_buffer_syntax() dict
-        if has("syntax") && !(exists('b:did_syntax'))
-            syn match BuffergatorTabPageLine '^TAB PAGE \d\+\:$'
-            " syn match BuffergatorTabPageLineStart '^==== Tab Page \[' nextgroup=BuffergatorTabPageNumber
-            " syn match BuffergatorTabPageNumber '\d\+' nextgroup=BuffergatorTabPageLineEnd
-            " syn match BuffergatorTabPageLineEnd '\] ====$'
-            syn region BuffergatorModifiedFileLine start='^\[\s\{-}.\{-1,}\s\{-}\] + ' keepend oneline end='$'
-            syn region BuffergatorUnmodifiedFileLine start='^\[\s\{-}.\{-1,}\s\{-}\]   ' keepend oneline end='$'
-            syn match BuffergatorModifiedFileSyntaxKey '^\zs\[\s\{-}.\{-1,}\s\{-}\]\ze' containedin=BuffergatorModifiedFileLine nextgroup=BuffergatorModifiedFilename
-            syn match BuffergatorUnmodifiedFileSyntaxKey '^\zs\[\s\{-}.\{-1,}\s\{-}\]\ze' containedin=BuffergatorUnmodifiedFileLine nextgroup=BuffergatorUnmodifiedFilename
-            syn match BuffergatorModifiedFilename ' + .\+$' containedin=BuffergatorModifiedFilenameEntry
-            syn match BuffergatorUnmodifiedFilename '   .\+$' containedin=BuffergatorUnmodifiedFileLine
-            highlight! link BuffergatorModifiedFileSyntaxKey   LineNr
-            highlight! link BuffergatorUnmodifiedFileSyntaxKey   LineNr
-            highlight! link BuffergatorModifiedFileFlag   WarningMsg
-            highlight! link BuffergatorModifiedFilename   WarningMsg
-            highlight! link BuffergatorTabPageLine Title
-            " highlight! link BufergatorModifiedFilename NonText
-            " highlight! link BufergatorUnmodifiedFilename NonText
-            " highlight! link BuffergatorTabPageLineStart Title
-            " highlight! link BuffergatorTabPageNumber Special
-            " highlight! link BuffergatorTabPageLineEnd Title
-            highlight! link BuffergatorCurrentEntry CursorLine
-            let b:did_syntax = 1
-        endif
-    endfunction
+    function! l:catalog_viewer.setup_buffer_syntax() dict "{{{
+      return
+    endfunction "}}}
 
-    function! l:catalog_viewer.setup_buffer_keymaps() dict
+    function! l:catalog_viewer.setup_buffer_keymaps() dict "{{{
 
         call self.disable_editing_keymaps()
 
@@ -1636,10 +1720,10 @@ function! s:NewTabCatalogViewer()
         noremap <buffer> <silent> <C-P>       :<C-U>call b:buffergator_catalog_viewer.goto_win_entry("p")<CR>
         noremap <buffer> <silent> A           :call b:buffergator_catalog_viewer.toggle_zoom()<CR>
 
-    endfunction
+    endfunction "}}}
 
     " Appends a line to the buffer and registers it in the line log.
-    function! l:catalog_viewer.append_line(text, jump_to_tabnum, jump_to_winnum) dict
+    function! l:catalog_viewer.append_line(text, jump_to_tabnum, jump_to_winnum) dict "{{{
         let l:line_map = {
                     \ "target" : [a:jump_to_tabnum, a:jump_to_winnum],
                     \ }
@@ -1648,23 +1732,23 @@ function! s:NewTabCatalogViewer()
         endif
         let self.jump_map[line("$")] = l:line_map
         call append(line("$")-1, a:text)
-    endfunction
+    endfunction"}}}
 
-    function! l:catalog_viewer.goto_index_entry(direction) dict
+    function! l:catalog_viewer.goto_index_entry(direction) dict "{{{
         let l:ok = self.goto_pattern("^T", a:direction)
         execute("normal! zz")
         " if l:ok && a:visit_target
         "     call self.visit_target(1, a:refocus_catalog, "")
         " endif
-    endfunction
+    endfunction "}}}
 
-    function! l:catalog_viewer.goto_win_entry(direction) dict
+    function! l:catalog_viewer.goto_win_entry(direction) dict "{{{
         let l:ok = self.goto_pattern('^\[', a:direction)
         execute("normal! zz")
-    endfunction
+    endfunction "}}}
 
     " Go to the selected buffer.
-    function! l:catalog_viewer.visit_target() dict
+    function! l:catalog_viewer.visit_target() dict "{{{
         let l:cur_line = line(".")
         if !has_key(l:self.jump_map, l:cur_line)
             call s:_buffergator_messenger.send_info("Not a valid navigation line")
@@ -1675,7 +1759,7 @@ function! s:NewTabCatalogViewer()
         execute("tabnext " . l:jump_to_tabnum)
         execute(l:jump_to_winnum . "wincmd w")
         " call s:_buffergator_messenger.send_info(expand(bufname(l:jump_to_bufnum)))
-    endfunction
+    endfunction "}}}
 
     function! l:catalog_viewer.setup_buffer_statusline() dict
         setlocal statusline=%{BuffergatorTabsStatusLine()}
@@ -1730,6 +1814,7 @@ augroup BufferGatorAuto
   au!
   autocmd BufDelete * call <SID>UpdateBuffergator('delete',expand('<abuf>'))
   autocmd BufEnter * call <SID>UpdateBuffergator('enter',expand('<abuf>'))
+  autocmd WinLeave * call <SID>UpdateBuffergator('leave', expand('<abuf>'))
   autocmd BufWritePost * call <SID>UpdateBuffergator('writepost',expand('<abuf>'))
 augroup NONE
 " 1}}}
@@ -1747,44 +1832,25 @@ function! s:UpdateBuffergator(event, affected)
       return
     endif
     
-    let l:calling = bufnr("%")
-    let l:self_call = 0
-    let l:buffergators = s:_find_buffers_with_var("is_buffergator_buffer",1)
-    call s:_catalog_viewer.update_buffers_info()
+    for l:gator in s:_buffergators
+       echomsg(l:gator.bufnum)
+       call l:gator.update_buffers_info()
+       " BufDelete is the last Autocommand executed, but it's done BEFORE the
+       " buffer is actually deleted. - preemptively remove the buffer from
+       " the list if this is a delete event
+       if a:event == "delete"
+         call filter(l:gator.buffers_catalog,'v:val["bufnum"] != ' . a:affected)
+       endif
 
-    " BufDelete is the last Autocommand executed, but it's done BEFORE the
-    " buffer is actually deleted. - preemptively remove the buffer from
-    " the list if this is a delete event
-    if a:event == "delete"
-      call filter(s:_catalog_viewer.buffers_catalog,'v:val["bufnum"] != ' . a:affected)
-    endif
-
-    for l:gator in l:buffergators
-      if bufwinnr(l:gator) > 0
-        if l:calling != l:gator
-          execute bufwinnr(l:gator) . "wincmd w"
-        else
-          let l:self_call = 1
-        endif
-
-        " do not execute for tab view catalogs
-        if has_key(b:buffergator_catalog_viewer, "tab_catalog")
-          continue
-        endif
-
-        call s:_catalog_viewer.render_buffer()
-
-        if !l:self_call
-          call s:_catalog_viewer.highlight_current_line()
-        endif
-      endif
+       let l:switch = l:gator.switch_to_buffer()
+       if l:switch
+         call l:gator.render_buffer()
+         call l:gator.highlight_current_line()
+         let l:cmd = (a:event == "delete") ? "wincmd ^" : 
+         echomsg l:cmd
+         execute l:cmd
+       endif
     endfor
-
-    if exists("b:is_buffergator_buffer") && !l:self_call
-      execute "wincmd p"
-    elseif a:event == 'delete' && !l:self_call
-      execute "wincmd ^"
-    endif
 endfunction
 
 function! s:OpenBuffergatorTabs()
@@ -1830,6 +1896,13 @@ if !exists('g:buffergator_suppress_keymaps') || !g:buffergator_suppress_keymaps
     nnoremap <silent> <Leader>T :BuffergatorTabsClose<CR>
 endif
 
+let g:_catalog_viewer = s:_catalog_viewer
+let g:_tab_catalog_viewer = s:_tab_catalog_viewer
+
+let s:_buffergators = [s:_catalog_viewer, s:_tab_catalog_viewer]
+let g:_buffergators = s:_buffergators
+
+
 " 1}}}
 
 " Restore State {{{1
@@ -1838,4 +1911,3 @@ endif
 let &cpo = s:save_cpo
 " 1}}}
 
-" vim:foldlevel=4:
