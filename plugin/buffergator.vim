@@ -104,7 +104,7 @@ let s:_default_key_maps = {
         \ 'BuffergatorZoomWin'          : ['A'],
         \ 'BuffergatorRebuild'          : ['r'],
         \ 'BuffergatorQuit'             : ['q'],
-        \ 'BuffergatorSelect'           : ['<CR>,o'],
+        \ 'BuffergatorSelect'           : ['<CR>', 'o'],
      \ },
    \ }
 
@@ -541,29 +541,10 @@ function! s:NewCatalogViewer(name, title)
     let l:catalog_viewer["max_buffer_basename_len"] = 30
     let l:catalog_viewer["buffers_catalog"] = {}
     let l:catalog_viewer["current_buffer_index"] = -1
+    let l:catalog_viewer["id"] = UUID()
 
     " Initialize object state.
     let l:catalog_viewer["bufnum"] = -1
-
-
-    " find buffers in our catalog with matching properties
-    function! l:catalog_viewer.find_buffer(property, value) dict "{{{
-      let l:results = []
-
-      for l:index in range(0, len(self.buffers_list()) - 1)
-        let l:buffer = self.buffers_list()[l:index]
-        if l:buffer[a:property] == a:value
-          let l:r_buffer = copy(l:buffer)
-          let l:r_buffer['index'] = l:index
-          call add(l:results, l:r_buffer)
-        endif
-      endfor
-      return l:results
-    endfunction "}}}
-
-    function! l:catalog_viewer.buffer_list dict "{{{
-       return self["buffers_catalog"]
-    endfunction "}}}
 
     " Opens the buffer for viewing, creating it if needed.
     " First argument, if given, should be false if the buffers info is *not*
@@ -770,14 +751,17 @@ function! s:NewCatalogViewer(name, title)
     " returns 1 if the buffer is active and was switched to or created
     function! l:catalog_viewer.activate_viewport(...) dict "{{{
         if self.bufnum < 0 && a:0 > 0 && a:1 == 0
+          echomsg "buffer not active, skipping"
           return 0
         endif
 
         let l:bfwn = bufwinnr(self.bufnum)
         if l:bfwn == winnr()
             " viewport wth buffer already active and current
+            echomsg "called from myself"
             return -1
         elseif l:bfwn >= 0
+            echomsg "switch to buffergator"
             " viewport with buffer exists, but not current
             execute(l:bfwn . " wincmd w")
         else
@@ -1160,7 +1144,8 @@ function! s:NewCatalogViewer(name, title)
     function! l:catalog_viewer.toggle_type() dict "{{{
       " if my window is open, switch to the other sort of navigator
       if self.activate_viewport(0)
-        if getbufvar("%","buffergator_catalog_viewer") == "tab_catalog_viewer"
+        let l:buffergator = getbufvar("%","buffergator_catalog_viewer")
+        if l:buffergator.type == "tab_catalog_viewer"
           call setbufvar("%",'buffergator_catalog_viewer',s:_catalog_viewer)
         else
           call setbufvar("%",'buffergator_catalog_viewer',s:_tab_catalog_viewer)
@@ -1244,12 +1229,29 @@ function! s:NewBufferCatalogViewer()
     let l:catalog_viewer = s:NewCatalogViewer("[[buffergator-buffers]]", "buffergator")
     let l:catalog_viewer["calling_bufnum"] = -1
     let l:catalog_viewer["type"] = "buffer_catalog_viewer"
+    let l:catalog_viewer["id"] = UUID()
 
     " Populates the buffer list
     function! l:catalog_viewer.update_buffers_info() dict "{{{
         let self.buffers_catalog = self.list_buffers()
         return self.buffers_catalog
     endfunction "}}}
+
+    " find buffers in our catalog with matching properties
+    function! l:catalog_viewer.find_buffers(property, value) dict "{{{
+      let l:results = []
+
+      for l:index in range(0, len(self.buffers_catalog) - 1)
+        let l:buffer = self.buffers_catalog[l:index]
+        if l:buffer[a:property] == a:value
+          let l:r_buffer = copy(l:buffer)
+          let l:r_buffer['index'] = l:index
+          call add(l:results, l:r_buffer)
+        endif
+      endfor
+      return l:results
+    endfunction "}}}
+
 
     " Sets buffer key maps.
     function! l:catalog_viewer.setup_buffer_keymaps() dict  "{{{
@@ -1539,10 +1541,9 @@ function! s:NewTabCatalogViewer()
 
     " initialize
     let l:catalog_viewer = s:NewCatalogViewer("[[buffergator-tabs]]", "buffergator")
-    echomsg "current cat buffer " . string(s:_catalog_viewer.buffers_catalog)
-    let l:catalog_viewer["buffers_catalog"] = s:_catalog_viewer.buffers_catalog
     let l:catalog_viewer["tab_catalog"] = []
     let l:catalog_viewer["type"] = "tab_catalog_viewer"
+    let l:catalog_viewer["id"] = UUID()
 
     " Populates the buffer list
     function! l:catalog_viewer.update_buffers_info() dict "{{{
@@ -1550,6 +1551,7 @@ function! s:NewTabCatalogViewer()
         for tabnum in range(1, tabpagenr('$'))
             call add(self.tab_catalog, tabpagebuflist(tabnum))
         endfor
+        call s:_catalog_viewer.update_buffers_info()
         return self.tab_catalog
     endfunction "}}}
 
@@ -1574,7 +1576,7 @@ function! s:NewTabCatalogViewer()
             
             for l:window_index in range(len(l:tabinfo))
                 let l:tabbufnum = l:tabinfo[l:window_index]
-                let l:bufinfo = get(self.find_buffer('bufnum',l:tabbufnum),0,{})
+                let l:bufinfo = get(s:_catalog_viewer.find_buffers('bufnum',l:tabbufnum),0,{})
                 echo l:bufinfo
                 if l:bufinfo != {}
                   let l:subline = self.render_entry(l:bufinfo)
@@ -1679,6 +1681,7 @@ endfunction
 if exists("s:_buffergator_messenger")
     unlet s:_buffergator_messenger
 endif
+
 let s:_buffergator_messenger = s:NewMessenger("")
 let s:_catalog_viewer = s:NewBufferCatalogViewer()
 let s:_tab_catalog_viewer = s:NewTabCatalogViewer()
@@ -1709,16 +1712,13 @@ function! s:OpenBuffergator()
 endfunction
 
 function! s:UpdateBuffergator(event, affected)
+    echomsg a:event . " - " . a:affected
     if !(g:buffergator_autoupdate)
         return
     endif
-    
-    " BufDelete is the last Autocommand executed, but it's done BEFORE the
-    " buffer is actually deleted. - preemptively remove the buffer from
-    " the list if this is a delete event
-    if a:event == "delete"
-        call filter(s:_catalog_viewer.buffers_catalog,'v:val["bufnum"] != ' . a:affected)
-    endif
+
+    echomsg "catalog " . s:_catalog_viewer.id
+    echomsg "tab catalog " . s:_tab_catalog_viewer.id
 
     let l:buffer_gator_buffer = get(s:_find_buffers_with_var("is_buffergator_buffer",1),0,0)
     if !l:buffer_gator_buffer
@@ -1727,14 +1727,23 @@ function! s:UpdateBuffergator(event, affected)
 
     let l:gator = getbufvar(l:buffer_gator_buffer,"buffergator_catalog_viewer")
     call l:gator.update_buffers_info()
+    
+    " BufDelete is the last Autocommand executed, but it's done BEFORE the
+    " buffer is actually deleted. - preemptively remove the buffer from
+    " the list if this is a delete event
+    if a:event == "delete"
+        call filter(s:_catalog_viewer.buffers_catalog,'v:val["bufnum"] != ' . a:affected)
+    endif
+
+    echomsg "operating on " . l:gator.id
        
     let l:switch = l:gator.activate_viewport(0)
-    echomsg string([l:switch, l:gator.bufname])
     if l:switch
         call l:gator.render_buffer()
         if l:switch > 0
             call l:gator.highlight_current_line()
-            let l:cmd = (a:event == "delete") ? l:gator.first_usable_viewport() . "wincmd w" : "wincmd p"
+            let l:cmd = (a:event == "delete") ?  "wincmd ^" : "wincmd p"
+            echomsg l:cmd
             execute l:cmd
         endif
     endif
@@ -1779,10 +1788,6 @@ endif
 
 let g:_catalog_viewer = s:_catalog_viewer
 let g:_tab_catalog_viewer = s:_tab_catalog_viewer
-
-let s:_buffergators = [s:_catalog_viewer, s:_tab_catalog_viewer]
-let g:_buffergators = s:_buffergators
-
 
 " 1}}}
 
