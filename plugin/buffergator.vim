@@ -114,57 +114,57 @@ endif
 
 " Plugin Scoped Maps {{{1
 """" Catalog management
-noremap <Plug>BuffergatorCycleSort         :<C-U>call b:buffergator_catalog_viewer.cycle_sort_regime()<CR>
-noremap <Plug>BuffergatorCycleDisplay      :<C-U>call b:buffergator_catalog_viewer.cycle_display_regime()<CR>
-noremap <Plug>BuffergatorCyclePath         :<C-U>call b:buffergator_catalog_viewer.cycle_directory_path_display()<CR>
-noremap <Plug>BuffergatorRebuild           :<C-U>call b:buffergator_catalog_viewer.rebuild_catalog()<CR>
-noremap <Plug>BuffergatorQuit              :<C-U>call b:buffergator_catalog_viewer.close(1)<CR>
-noremap <Plug>BuffergatorDelete            :<C-U>call b:buffergator_catalog_viewer.delete_target(0, 0)<CR>
-noremap <Plug>BuffergatorForceDelete       :<C-U>call b:buffergator_catalog_viewer.delete_target(0, 1)<CR>
-noremap <Plug>BuffergatorWipe              :<C-U>call b:buffergator_catalog_viewer.delete_target(1, 0)<CR>
-noremap <Plug>BuffergatorForceWipe         :<C-U>call b:buffergator_catalog_viewer.delete_target(1, 1)<CR>
+noremap <unique> <Plug>BuffergatorCycleSort         :<C-U>call b:buffergator_catalog_viewer.cycle_sort_regime()<CR>
+noremap <unique> <Plug>BuffergatorCycleDisplay      :<C-U>call b:buffergator_catalog_viewer.cycle_display_regime()<CR>
+noremap <unique> <Plug>BuffergatorCyclePath         :<C-U>call b:buffergator_catalog_viewer.cycle_directory_path_display()<CR>
+noremap <unique> <Plug>BuffergatorRebuild           :<C-U>call b:buffergator_catalog_viewer.rebuild_catalog()<CR>
+noremap <unique> <Plug>BuffergatorQuit              :<C-U>call b:buffergator_catalog_viewer.close(1)<CR>
+noremap <unique> <Plug>BuffergatorDelete            :<C-U>call b:buffergator_catalog_viewer.delete_target(0, 0)<CR>
+noremap <unique> <Plug>BuffergatorForceDelete       :<C-U>call b:buffergator_catalog_viewer.delete_target(0, 1)<CR>
+noremap <unique> <Plug>BuffergatorWipe              :<C-U>call b:buffergator_catalog_viewer.delete_target(1, 0)<CR>
+noremap <unique> <Plug>BuffergatorForceWipe         :<C-U>call b:buffergator_catalog_viewer.delete_target(1, 1)<CR>
 
 """"" Selection                                     :show target and switch focus
-noremap <Plug>BuffergatorSelect            :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
-noremap <Plug>BuffergatorSplitVert         :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "vert sb")<CR>
-noremap <Plug>BuffergatorSplitHorz         :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "sb")<CR>
-noremap <Plug>BuffergatorNewTab            :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "tab sb")<CR>
+noremap <unique> <Plug>BuffergatorSelect            :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
+noremap <unique> <Plug>BuffergatorSplitVert         :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "vert sb")<CR>
+noremap <unique> <Plug>BuffergatorSplitHorz         :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "sb")<CR>
+noremap <unique> <Plug>BuffergatorNewTab            :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "tab sb")<CR>
 
 
 
 """"" Selection                                     :show target and switch focus, preserving the catalog regardless of the autodismiss setting
-noremap <Plug>BuffergatorSelectGator       :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "")<CR>
-noremap <Plug>BuffergatorSplitVertGator    :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "vert sb")<CR>
-noremap <Plug>BuffergatorSplitHorzGator    :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "sb")<CR>
-noremap <Plug>BuffergatorNewTabGator       :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "tab sb")<CR>
+noremap <unique> <Plug>BuffergatorSelectGator       :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "")<CR>
+noremap <unique> <Plug>BuffergatorSplitVertGator    :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "vert sb")<CR>
+noremap <unique> <Plug>BuffergatorSplitHorzGator    :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "sb")<CR>
+noremap <unique> <Plug>BuffergatorNewTabGator       :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "tab sb")<CR>
 
 
 """"" Preview                                      :show target , keeping focus on catalog
-noremap <Plug>BuffergatorPreview           :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
-noremap <Plug>BuffergatorPreviewVertSplit  :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "vert sb")<CR>
-noremap <Plug>BuffergatorPreviewHorzSplit  :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "sb")<CR>
-noremap <Plug>BuffergatorPreviewTab        :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "tab sb")<CR>
-noremap <Plug>BuffergatorPreviewNext       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
-noremap <Plug>BuffergatorPreviewPrevious   :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
+noremap <unique> <Plug>BuffergatorPreview           :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
+noremap <unique> <Plug>BuffergatorPreviewVertSplit  :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "vert sb")<CR>
+noremap <unique> <Plug>BuffergatorPreviewHorzSplit  :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "sb")<CR>
+noremap <unique> <Plug>BuffergatorPreviewTab        :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "tab sb")<CR>
+noremap <unique> <Plug>BuffergatorPreviewNext       :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n", 1, 1)<CR>
+noremap <unique> <Plug>BuffergatorPreviewPrevious   :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p", 1, 1)<CR>
 
 
 """"" Preview                                       :go to existing window showing target
-noremap <Plug>BuffergatorFind              :<C-U>call b:buffergator_catalog_viewer.visit_open_target(1, !g:buffergator_autodismiss_on_select, "")<CR>
-noremap <Plug>BuffergatorFindOrOpen        :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "")<CR>
-noremap <Plug>BuffergatorFindOrVSplit      :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "vert sb")<CR>
-noremap <Plug>BuffergatorFindOrHSplit      :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "sb")<CR>
-noremap <Plug>BuffergatorFindOrTab         :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "tab sb")<CR>
+noremap <unique> <Plug>BuffergatorFind              :<C-U>call b:buffergator_catalog_viewer.visit_open_target(1, !g:buffergator_autodismiss_on_select, "")<CR>
+noremap <unique> <Plug>BuffergatorFindOrOpen        :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "")<CR>
+noremap <unique> <Plug>BuffergatorFindOrVSplit      :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "vert sb")<CR>
+noremap <unique> <Plug>BuffergatorFindOrHSplit      :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "sb")<CR>
+noremap <unique> <Plug>BuffergatorFindOrTab         :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "tab sb")<CR>
 
 
 """"" Tab Catalog Maps
-noremap <Plug>BuffergatorTabSelect         :call b:buffergator_catalog_viewer.visit_target()<CR>
-noremap <Plug>BuffergatorTabNext           :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n")<CR>
-noremap <Plug>BuffergatorTabPrev           :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p")<CR>
-noremap <Plug>BuffergatorTabWinNext        :<C-U>call b:buffergator_catalog_viewer.goto_win_entry("n")<CR>
-noremap <Plug>BuffergatorTabWinPrev        :<C-U>call b:buffergator_catalog_viewer.goto_win_entry("p")<CR>
+noremap <unique> <Plug>BuffergatorTabSelect         :call b:buffergator_catalog_viewer.visit_target()<CR>
+noremap <unique> <Plug>BuffergatorTabNext           :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("n")<CR>
+noremap <unique> <Plug>BuffergatorTabPrev           :<C-U>call b:buffergator_catalog_viewer.goto_index_entry("p")<CR>
+noremap <unique> <Plug>BuffergatorTabWinNext        :<C-U>call b:buffergator_catalog_viewer.goto_win_entry("n")<CR>
+noremap <unique> <Plug>BuffergatorTabWinPrev        :<C-U>call b:buffergator_catalog_viewer.goto_win_entry("p")<CR>
 
 """"" Window control
-noremap <Plug>BuffergatorZoomWin           :call b:buffergator_catalog_viewer.toggle_zoom()<CR>
+noremap <unique> <Plug>BuffergatorZoomWin           :call b:buffergator_catalog_viewer.toggle_zoom()<CR>
 "}}}
 
 " Script Data and Variables {{{1
@@ -1230,7 +1230,7 @@ function! s:NewBufferCatalogViewer()
         for l:command_set in ['buffer_catalog_viewer', 'global']
           for l:command in keys(s:_default_key_maps[l:command_set])
             for l:sequence in s:_default_key_maps[l:command_set][l:command]
-              execute 'map <buffer> <silent> ' . l:sequence . ' ' . '<Plug>' . l:command
+              execute 'nmap <buffer> ' . l:sequence . ' ' . '<Plug>' . l:command
             endfor
           endfor
         endfor
@@ -1587,7 +1587,11 @@ function! s:NewTabCatalogViewer()
         for l:command_set in ['tab_catalog_viewer', 'global']
           for l:command in keys(s:_default_key_maps[l:command_set])
             for l:sequence in s:_default_key_maps[l:command_set][l:command]
-              execute 'map <buffer> <silent> ' . l:sequence . ' ' . '<Plug>' . l:command
+              if !hasmapto(l:command,'n')
+                execute 'nmap <buffer> ' . l:sequence . ' ' . '<Plug>' . l:command
+              else
+                echomsg "custom map for " . l:sequence
+              endif
             endfor
           endfor
         endfor
