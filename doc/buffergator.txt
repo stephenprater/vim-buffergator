@@ -282,6 +282,11 @@ g:buffergator_display_regime~
         "filepath": display full buffer filepath
         "bufname": display buffer name
 
+g:buffergator_autoupdate~
+    Default: 0
+    If true and the Buffergator is not autodismissed, then the
+    buffer display will autoupdate when you switch buffers.
+
 g:buffergator_suppress_keymaps~
     Default: 0
     If true, then Buffergator will not automatically map "<Leader>b" to
