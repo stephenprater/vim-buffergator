@@ -252,19 +252,107 @@ let s:buffergator_viewport_split_modes = {
 
 " Buffer Status Symbols {{{3
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-let s:buffergator_buffer_line_symbols = {
-    \ 'current'  :    ">",
-    \ 'modified' :    "+",
-    \ 'alternate':    "#",
-    \ }
+" set the decorations for the buffer line and what column they appear in
+" '<buffer_property>' :   ["<symbol>",<column>,<priority>]
 
-" dictionaries are not in any order, so store the order here 
-let s:buffergator_buffer_line_symbols_order = [
-    \ 'current',
-    \ 'modified',
-    \ 'alternate',
-    \ ]
-" 3}}} 
+function! s:_alternate_arrow(buffer)
+  if a:buffer == -1
+    return "↓↑"
+  endif
+  " point toward the current buffer
+  let l:current_buffer_index = get(get(s:_catalog_viewer.find_buffer("is_current",1),0,{}),'index',-1)
+  let l:alternate_buffer_index = get(get(s:_catalog_viewer.find_buffer("is_alternate",1),0,{}),'index',-1)
+  if l:current_buffer_index < l:alternate_buffer_index
+    return "↑"
+  else
+    return "↓"
+  endif
+endfunction 
+
+function! s:_ontab_number(buffer)
+  if a:buffer == -1
+    return "[:digit:]"
+  else
+    for l:tab_page in range(1,tabpagenr('$'))
+       if index(tabpagebuflist(l:tab_page), a:buffer) >= 0
+         return l:tab_page
+       endif
+    endfor
+  endif
+endfunction
+
+function! s:_listed_buffer(buffer)
+  if a:buffer == -1
+    return '[:space:]'
+  else
+    return " "
+  end
+endfunction
+
+function! s:_buffer_line_symbol_list(status)
+  try
+    let BufferGatorSymbolFunc = function(s:buffergator_buffer_line_symbols[a:status][0])
+    let l:symbols = BufferGatorSymbolFunc(-1)
+    unlet BufferGatorSymbolFunc
+  catch /^Vim\%((\a\+)\)\=:E129/
+    " catch the inability to turn that into a function and
+    " return the string symbol instead
+    let l:symbols = s:buffergator_buffer_line_symbols[a:status][0]
+  endtry
+  return "[" . l:symbols . "]"
+endfunction
+
+" Each buffer has several attributes that are tracked by the buffergator
+" you can use different symbols depending on your preferences
+" '<buffer_property>' :   ["<symbol>",<column>,<priority>]
+" each entry in this table will generate a syntax entry
+" that can be used to match the buffer status
+" if a function name is given for the symbol status, that function
+" is called with the buffer number whenever the symbol would be drawn.
+"
+" the column is the column in which the symbol should appear
+" the priorty is the relative priorty of the symbol for that colum.
+" for instance, a readerror has a higher priority than a modified buffer
+" so a buffer with readerror will always show the readerror symbol
+" even if the buffer was also modified
+"
+" if the buffernumber is -1 the function should return a character class
+" compatible regex fragment of every character it could possibly return.
+"
+" the buffer options in general correspond to Vim buffer states
+" current - the current editing buffer
+" alternate - the alternate buffer
+" readerror - the buffer could not be read
+" modified - the buffer has been modified
+" readonly - buffer is readonly
+" ontab - buffer is visible on the current tab
+" visible - buffer is visible on a different tab
+" listed - always true - buffergator does not display unlisted buffers
+"
+"
+if has("multi_byte") && &encoding == 'utf-8'
+  let s:buffergator_buffer_line_symbols = {
+    \ 'current'  :    ["→"                   , 0 , 1 ] ,
+    \ 'alternate':    ["s:_alternate_arrow"  , 0 , 2 ] ,
+    \ 'readerror':    ["✗"                   , 1 , 1 ] ,
+    \ 'modified' :    ["▪"                   , 1 , 2 ] ,
+    \ 'readonly' :    ["⭤"                   , 1 , 3 ] ,
+    \ 'ontab'    :    ["⋅"                   , 2 , 1 ] ,
+    \ 'visible'  :    ["s:_ontab_number"     , 2 , 2 ] ,
+    \ 'listed'   :    ["s:_listed_buffer"    , 3 , 1 ] ,
+    \ }
+else
+  let s:buffergator_buffer_line_symbols = {
+    \ 'current'  :    [">"               , 0 , 1] ,
+    \ 'alternate':    ["#"               , 0 , 2] ,
+    \ 'readerror':    ["x"               , 1 , 1] ,
+    \ 'modified' :    ["+"               , 1 , 2] ,
+    \ 'readonly' :    ["!"               , 1 , 3] ,
+    \ 'on_tab'   :    [":"               , 2 , 1] ,
+    \ 'visible'  :    ["-"               , 2 , 2]
+    \ 'listed'   :    ["s:_listed_buffer", 3 , 1]
+    \ }
+endif
 
 " Catalog Sort Regimes {{{2
 " ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -517,6 +605,21 @@ function! s:_compare_dicts_by_value(m1, m2, key)
     endif
 endfunction
 
+function! s:_compare_symbols_by_priorty(s1, s2)
+  " 0 - symbol
+  " 1 - column 
+  " 2 - priorty
+  if a:s1[1][1] == a:s2[1][1]
+    if a:s1[1][2] == a:s2[1][2]
+      throw 'conflicting priorites for buffer symbols'
+    endif
+    return (a:s1[1][2] > a:s2[1][2] ? 1 : -1)
+  else
+    return (a:s1[1][1] > a:s2[1][1] ? 1 : -1)
+  endif
+endfunction
+
+
 " comparison function used for sorting buffers catalog by buffer number
 function! s:_compare_dicts_by_bufnum(m1, m2)
     return s:_compare_dicts_by_value(a:m1, a:m2, "bufnum")
@@ -600,6 +703,9 @@ function! s:NewCatalogViewer(name, title)
     let l:catalog_viewer["id"] = UUID()
     let l:catalog_viewer["prototype"] = "catalog_viewer"
 
+    let l:catalog_viewer["symbol_columns"] = max(map(values(s:buffergator_buffer_line_symbols),"v:val[1]")) + 1
+    let l:catalog_viewer["symbol_order"] = map(sort(items(s:buffergator_buffer_line_symbols),"s:_compare_symbols_by_priorty"),"v:val[0]")
+
     " Initialize object state.
     let l:catalog_viewer["bufnum"] = -1
 
@@ -635,15 +741,30 @@ function! s:NewCatalogViewer(name, title)
 
     function! l:catalog_viewer.line_symbols(bufinfo) dict "{{{
       let l:line_symbols = ""
+    function! l:catalog_viewer.line_symbols(bufinfo) dict
+      let l:line_symbols = repeat([" "], self.symbol_columns)
       " so we can control the order they are shown in
-      let l:noted_status = s:buffergator_buffer_line_symbols_order
-      for l:status in l:noted_status 
+      for l:status in reverse(copy(self.symbol_order))
         if a:bufinfo['is_' . l:status]
-          let l:line_symbols .= s:buffergator_buffer_line_symbols[l:status]
-        else
-          let l:line_symbols .= " "
+          let l:line_symbol = " "
+
+          " try to convert the symbol to a function - if unsuccessful,
+          " use the symbol as a string
+          " as an aside - a pox on whoever thought this was a sensible
+          " way to catch exceptions
+          try
+            let BufferGatorSymbolFunc = function(s:buffergator_buffer_line_symbols[l:status][0])
+            let l:line_symbol = BufferGatorSymbolFunc(a:bufinfo["bufnum"])
+            unlet BufferGatorSymbolFunc
+          catch /^Vim\%((\a\+)\)\=:E129/
+            let l:line_symbol = s:buffergator_buffer_line_symbols[l:status][0]
+          endtry
+          
+          let l:line_symbols[s:buffergator_buffer_line_symbols[l:status][1]] = l:line_symbol
         endif
       endfor
+      let l:line = s:_format_filled(join(l:line_symbols,""),self.symbol_columns,-1,0)
+      return l:line
       return l:line_symbols
     endfunction "}}}
 
@@ -732,17 +853,40 @@ function! s:NewCatalogViewer(name, title)
       endfor
     endfunction
 
+
+    " find buffers in our catalog with matching properties
+    function! l:catalog_viewer.find_buffer(property, value) dict
+      let l:results = []
+
+      for l:index in range(0, len(self.buffers_catalog) - 1)
+        let l:buffer = self.buffers_catalog[l:index]
+        if l:buffer[a:property] == a:value
+          let l:r_buffer = copy(l:buffer)
+          let l:r_buffer['index'] = l:index
+          call add(l:results, l:r_buffer)
+        endif
+      endfor
+      return l:results
+    endfunction
+
     function! l:catalog_viewer.list_buffers() dict
         let bcat = []
         redir => buffers_output
         execute('silent ls')
         redir END
         let self.max_buffer_basename_len = 0
+        let l:tab_buffers = tabpagebuflist()
         let l:buffers_output_rows = split(l:buffers_output, "\n")
         for l:buffers_output_row in l:buffers_output_rows
             let l:parts = matchlist(l:buffers_output_row, '^\s*\(\d\+\)\(.....\) "\(.*\)"')
             let l:info = {}
             let l:info["bufnum"] = l:parts[1] + 0
+            "is_ontab is set on buffers that are visible on the current tab
+            if index(l:tab_buffers,l:info["bufnum"]) >= 0 
+                let l:info["is_ontab"] = 1
+            else
+                let l:info["is_ontab"] = 0
+            endif
             if l:parts[2][0] == "u"
                 let l:info["is_unlisted"] = 1
                 let l:info["is_listed"] = 0
@@ -788,7 +932,7 @@ function! s:NewCatalogViewer(name, title)
                 let l:info["is_readerror"] = 0
             elseif l:parts[2][4] == "x"
                 let l:info["is_modified"] = 0
-                let l:info["is_readerror"] = 0
+                let l:info["is_readerror"] = 1 
             else
                 let l:info["is_modified"] = 0
                 let l:info["is_readerror"] = 0
@@ -874,12 +1018,7 @@ function! s:NewCatalogViewer(name, title)
     " Opens a viewport on the buffer according, creating it if neccessary
     " according to the spawn mode. Valid buffer number must already have been
     " obtained before this is called.
-    " an optional argument of 0 means that the view port will NOT be created
-    " if it doesn't exists
-    " returns 0 if the buffer cannot be switched to (because it's not active)
-    " returns -1 if the bffer is already active
-    " returns 1 if the buffer is active and was switched to or created
-    function! l:catalog_viewer.activate_viewport() dict "{{{
+    function! l:catalog_viewer.activate_viewport() dict
         let l:bfwn = bufwinnr(self.bufnum)
         if l:bfwn == winnr()
             " viewport wth buffer already active and current
@@ -1347,45 +1486,57 @@ function! s:NewBufferCatalogViewer()
     " Sets buffer syntax.
     function! l:catalog_viewer.setup_buffer_syntax() dict "{{{
         if has("syntax") && !(exists('b:did_syntax'))
-            syn region BuffergatorTabArea matchgroup=BuffergatorTabPageLine start="^TAB\sPAGE\s\d\+\:" end="^T"me=s-1,re=s-1 keepend fold contains=BuffergatorFileLine
-            syn region BuffergatorFileLine start='^\[\ze' keepend oneline end='$'
-            syn match BuffergatorBufferNr '^\[.\{3\}\]' containedin=BuffergatorFileLine
-            
-            let l:line_symbols = values(s:buffergator_buffer_line_symbols)
-            execute "syn match BuffergatorSymbol '[" . join(l:line_symbols,"") . "]' containedin=BuffergatorFileLine"
-             
+            syn region BuffergatorFileLine start='^' keepend oneline end='$' transparent
+            syn match BuffergatorBufferNr '^\[[[:digit:][:space:]]\{3\}\]'
+                  \ containedin=BuffergatorFileLine nextgroup=@BuffergatorEntries
+            syn match BuffergatorPath '/.\+$' containedin=BuffergatorFileLine
 
-            for l:buffer_status_index in range(0, len(s:buffergator_buffer_line_symbols_order) - 1)
-              let l:name = s:buffergator_buffer_line_symbols_order[l:buffer_status_index]
-              let l:line_symbol = s:buffergator_buffer_line_symbols[l:name]
-              let l:pattern = repeat('.', l:buffer_status_index)
-              let l:pattern .= l:line_symbol
-              let l:pattern .= repeat('.', len(s:buffergator_buffer_line_symbols_order) - (l:buffer_status_index + 1))
-              let l:pattern .= '\s.\{-}/'
+            for l:buffer_status in reverse(copy(self.symbol_order))
+              let l:name = l:buffer_status
+              let l:line_symbol = s:buffergator_buffer_line_symbols[l:buffer_status]
+
+              " build the patern that matches it's symbol at a certain location
+              let l:pattern = ']\@<=\('
+              let l:pattern .= repeat('.', l:line_symbol[1])
+              let l:pattern .= s:_buffer_line_symbol_list(l:buffer_status)
+              let l:pattern .= repeat('.', self.symbol_columns - (l:line_symbol[1] + 1))
+              let l:pattern .= '\)'
+              let l:pattern .= '.\{-}\/\@='
+              
               let l:pattern_name = "Buffergator" . toupper(l:name[0]) . tolower(l:name[1:]) . "Entry"
               let l:element = [
                 \ "syn match", 
-                \ l:pattern_name, "'" . l:pattern . "'me=e-1", 
-                \ "containedin=BuffergatorFileLine",
-                \ "contains=BuffergatorSymbol",
-                \ "nextgroup=BuffergatorPath"
+                \ l:pattern_name, "'" . l:pattern . "'", 
+                \ "nextgroup=BuffergatorPath",
+                \ "containedin=BuffergatorFileLine"
                 \ ]
 
               let l:syntax_cmd = join(l:element," ")
-           
+
               execute l:syntax_cmd
+              execute 'syntax cluster BuffergatorEntries add=' . l:pattern_name
+            endfor
+                        
+            for l:buffer_status in keys(s:buffergator_buffer_line_symbols)
+              execute "syn match BuffergatorSymbol /" . s:_buffer_line_symbol_list(l:buffer_status)
+                    \. "/ containedin=@BuffergatorEntries"
             endfor
 
-            syn match BuffergatorPath '/.\+$' containedin=BuffergatorFileLine
-           
             highlight link BuffergatorSymbol Constant
+            highlight link BuffergatorPath Comment
+            highlight link BuffergatorBufferNr LineNr 
+            
             highlight link BuffergatorAlternateEntry Function
             highlight link BuffergatorModifiedEntry String
             highlight link BuffergatorCurrentEntry Keyword
-            highlight link BuffergatorBufferNr LineNr 
-            highlight link BuffergatorPath Comment
-            highlight link BuffergatorTabPageLine Title
+            highlight link BuffergatorOntabEntry Normal 
+            highlight link BuffergatorListedEntry NonText
+            highlight link BuffergatorVisibleEntry Comment 
+            highlight link BuffergatorReaderrorEntry Error
+            highlight link BuffergatorReadonlyEntry Error
+
             let b:did_syntax = 1
+
         endif
     endfunction "}}}
 
