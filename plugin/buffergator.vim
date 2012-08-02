@@ -700,7 +700,6 @@ function! s:NewCatalogViewer(name, title)
     let l:catalog_viewer["max_buffer_basename_len"] = 30
     let l:catalog_viewer["buffers_catalog"] = {}
     let l:catalog_viewer["current_buffer_index"] = -1
-    let l:catalog_viewer["id"] = UUID()
     let l:catalog_viewer["prototype"] = "catalog_viewer"
 
     let l:catalog_viewer["symbol_columns"] = max(map(values(s:buffergator_buffer_line_symbols),"v:val[1]")) + 1
@@ -739,8 +738,6 @@ function! s:NewCatalogViewer(name, title)
         endif
     endfunction "}}}
 
-    function! l:catalog_viewer.line_symbols(bufinfo) dict "{{{
-      let l:line_symbols = ""
     function! l:catalog_viewer.line_symbols(bufinfo) dict
       let l:line_symbols = repeat([" "], self.symbol_columns)
       " so we can control the order they are shown in
@@ -1409,11 +1406,66 @@ function! s:NewCatalogViewer(name, title)
     function! l:catalog_viewer.update_buffers_info() dict
     endfunction
 
-    function! l:catalog_viewer.open(...) dict
-    endfunction
+    " Sets buffer syntax.
+    function! l:catalog_viewer.setup_buffer_syntax() dict "{{{
+        if has("syntax") && !(exists('b:did_syntax'))
+            syn region BuffergatorFileLine start='\v^(TAB)@!' keepend oneline end='$' transparent
+            syn region BuffergatorTabArea matchgroup=BuffergatorTabPageLine 
+                  \ start="\v^TAB\sPAGE\s\d+\:" end="^T"me=s-1,re=s-1 keepend 
+                  \ fold contains=BuffergatorFileLine transparent 
+            syn match BuffergatorBufferNr '\v^\[[[:digit:][:space:]]{3}\]'
+                  \ containedin=BuffergatorFileLine,BuffergatorTabArea nextgroup=@BuffergatorEntries
+            syn match BuffergatorPath '\v/.+$' containedin=BuffergatorFileLine
+        
+            for l:buffer_status in reverse(copy(self.symbol_order))
+                let l:name = l:buffer_status
+                let l:line_symbol = s:buffergator_buffer_line_symbols[l:buffer_status]
 
-    function! l:catalog_viewer.setup_buffer_syntax() dict
-    endfunction
+                " build the patern that matches it's symbol at a certain location
+                let l:pattern = '\v]@<=('
+                let l:pattern .= repeat('.', l:line_symbol[1])
+                let l:pattern .= s:_buffer_line_symbol_list(l:buffer_status)
+                let l:pattern .= repeat('.', self.symbol_columns - (l:line_symbol[1] + 1))
+                let l:pattern .= ')'
+                let l:pattern .= '.{-}/@='
+                
+                let l:pattern_name = "Buffergator" . toupper(l:name[0]) . tolower(l:name[1:]) . "Entry"
+                let l:element = [
+                  \ "syn match", 
+                  \ l:pattern_name, "'" . l:pattern . "'", 
+                  \ "nextgroup=BuffergatorPath",
+                  \ "containedin=BuffergatorFileLine"
+                  \ ]
+
+                let l:syntax_cmd = join(l:element," ")
+
+                execute l:syntax_cmd
+                execute 'syntax cluster BuffergatorEntries add=' . l:pattern_name
+            endfor
+                        
+            for l:buffer_status in keys(s:buffergator_buffer_line_symbols)
+              execute "syn match BuffergatorSymbol /" . s:_buffer_line_symbol_list(l:buffer_status)
+                    \. "/ containedin=@BuffergatorEntries"
+            endfor
+
+            highlight link BuffergatorSymbol Constant
+            highlight link BuffergatorPath Comment
+            highlight link BuffergatorBufferNr LineNr 
+            highlight link BuffergatorTabPageLine Title
+            
+            highlight link BuffergatorAlternateEntry Function
+            highlight link BuffergatorModifiedEntry String
+            highlight link BuffergatorCurrentEntry Keyword
+            highlight link BuffergatorOntabEntry Normal 
+            highlight link BuffergatorListedEntry NonText
+            highlight link BuffergatorVisibleEntry Comment 
+            highlight link BuffergatorReaderrorEntry Error
+            highlight link BuffergatorReadonlyEntry Error
+
+            let b:did_syntax = 1
+
+        endif
+    endfunction "}}}
 
     function! l:catalog_viewer.setup_buffer_keymaps() dict
     endfunction
@@ -1448,97 +1500,6 @@ function! s:NewBufferCatalogViewer()
         let self.buffers_catalog = self.list_buffers()
         return self.buffers_catalog
     endfunction
-
-    " Opens the buffer for viewing, creating it if needed.
-    " First argument, if given, should be false if the buffers info is *not*
-    " to be repopulated; defaults to 1
-    " Second argument, if given, should be number of calling window.
-    function! l:catalog_viewer.open(...) dict
-        " populate data
-        if (a:0 == 0 || a:1 > 0)
-            call self.update_buffers_info()
-        endif
-        " store calling buffer
-        if (a:0 >= 2 && a:2)
-            let self.calling_bufnum = a:2
-        else
-            let self.calling_bufnum = bufnr("%")
-        endif
-        " get buffer number of the catalog view buffer, creating it if neccessary
-        if self.bufnum < 0 || !bufexists(self.bufnum)
-            " create and render a new buffer
-            call self.create_buffer()
-        else
-            " buffer exists: activate a viewport on it according to the
-            " spawning mode, re-rendering the buffer with the catalog if needed
-            call self.activate_viewport()
-            call self.render_buffer()
-            " if (a:0 > 0 && a:1) || b:buffergator_catalog_viewer != self
-            "     call self.render_buffer()
-            " else
-            "     " search for calling buffer number in jump map,
-            "     " when found, go to that line
-            " endif
-        endif
-    endfunction
-
-
-    " Sets buffer syntax.
-    function! l:catalog_viewer.setup_buffer_syntax() dict "{{{
-        if has("syntax") && !(exists('b:did_syntax'))
-            syn region BuffergatorFileLine start='^' keepend oneline end='$' transparent
-            syn match BuffergatorBufferNr '^\[[[:digit:][:space:]]\{3\}\]'
-                  \ containedin=BuffergatorFileLine nextgroup=@BuffergatorEntries
-            syn match BuffergatorPath '/.\+$' containedin=BuffergatorFileLine
-
-            for l:buffer_status in reverse(copy(self.symbol_order))
-              let l:name = l:buffer_status
-              let l:line_symbol = s:buffergator_buffer_line_symbols[l:buffer_status]
-
-              " build the patern that matches it's symbol at a certain location
-              let l:pattern = ']\@<=\('
-              let l:pattern .= repeat('.', l:line_symbol[1])
-              let l:pattern .= s:_buffer_line_symbol_list(l:buffer_status)
-              let l:pattern .= repeat('.', self.symbol_columns - (l:line_symbol[1] + 1))
-              let l:pattern .= '\)'
-              let l:pattern .= '.\{-}\/\@='
-              
-              let l:pattern_name = "Buffergator" . toupper(l:name[0]) . tolower(l:name[1:]) . "Entry"
-              let l:element = [
-                \ "syn match", 
-                \ l:pattern_name, "'" . l:pattern . "'", 
-                \ "nextgroup=BuffergatorPath",
-                \ "containedin=BuffergatorFileLine"
-                \ ]
-
-              let l:syntax_cmd = join(l:element," ")
-
-              execute l:syntax_cmd
-              execute 'syntax cluster BuffergatorEntries add=' . l:pattern_name
-            endfor
-                        
-            for l:buffer_status in keys(s:buffergator_buffer_line_symbols)
-              execute "syn match BuffergatorSymbol /" . s:_buffer_line_symbol_list(l:buffer_status)
-                    \. "/ containedin=@BuffergatorEntries"
-            endfor
-
-            highlight link BuffergatorSymbol Constant
-            highlight link BuffergatorPath Comment
-            highlight link BuffergatorBufferNr LineNr 
-            
-            highlight link BuffergatorAlternateEntry Function
-            highlight link BuffergatorModifiedEntry String
-            highlight link BuffergatorCurrentEntry Keyword
-            highlight link BuffergatorOntabEntry Normal 
-            highlight link BuffergatorListedEntry NonText
-            highlight link BuffergatorVisibleEntry Comment 
-            highlight link BuffergatorReaderrorEntry Error
-            highlight link BuffergatorReadonlyEntry Error
-
-            let b:did_syntax = 1
-
-        endif
-    endfunction "}}}
 
     " Sets buffer key maps.
     function! l:catalog_viewer.setup_buffer_keymaps() dict 
@@ -1832,7 +1793,6 @@ function! s:NewTabCatalogViewer()
     let l:catalog_viewer["calling_view"] = -1
     let l:catalog_viewer["catalog_viewer"] = s:_catalog_viewer
     let l:catalog_viewer["prototype"] = "tab_catalog_viewer"
-    let l:catalog_viewer["id"] = UUID()
 
     " Populates the buffer list
     function! l:catalog_viewer.update_buffers_info() dict "{{{
@@ -1873,7 +1833,7 @@ function! s:NewTabCatalogViewer()
                 " number of the window displaying the buffer, which is much more
                 " helpful than three copies of the same buffer info, and the
                 " 'current' buffer with the current window
-                let l:bufinfo = copy(get(self.catalog_viewer.find_buffers('bufnum',l:tabbufnum),0,{}))
+                let l:bufinfo = copy(get(self.catalog_viewer.find_buffer('bufnum',l:tabbufnum),0,{}))
                     if l:bufinfo != {}
                     
                     " only highlight on the current tab
