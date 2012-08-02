@@ -108,6 +108,9 @@ let s:_default_keymaps = {
         \ 'BuffergatorQuit'             : ['q'],
         \ 'BuffergatorShowHelp'         : ['?', '<F1>'],
      \ },
+     \ 'help'                           : {
+        \ 'BuffergatorCloseHelp'        : ['?', 'q'],
+      \},
    \ }
 
 let s:_keymap_help = {
@@ -204,7 +207,10 @@ noremap <Plug>BuffergatorTabWinPrev        :<C-U>call b:buffergator_catalog_view
 
 """"" Window control
 noremap <Plug>BuffergatorZoomWin           :call b:buffergator_catalog_viewer.toggle_zoom()<CR>
-noremap <Plug>BuffergatorShowHelp          :call b:buffergator_catalog_viewer.show_help()<CR>
+noremap <Plug>BuffergatorShowHelp          :call b:buffergator_catalog_viewer.toggle_help()<CR>
+
+""""" Close the help window
+noremap <Plug>BuffergatorCloseHelp         :q<CR>:wincmd p<CR>
 
 
 " Script Data and Variables {{{1
@@ -610,7 +616,7 @@ function! s:NewCatalogViewer(name, title)
       return l:line_symbols
     endfunction
 
-    function! l:catalog_viewer.show_help() dict
+    function! l:catalog_viewer.toggle_help() dict
       let l:help_buffer = bufnr("[[buffergator-help]]", 1)
       if bufwinnr(l:help_buffer) < 0
           let self.split_mode = s:_get_split_mode()
@@ -624,7 +630,8 @@ function! s:NewCatalogViewer(name, title)
               setlocal winfixheight
           endif
       else
-        execute bufwinnr(l:help_buffer) . "wincmd w"
+        execute "bdelete " l:help_buffer
+        return
       endif
       
       setlocal modifiable
@@ -633,17 +640,17 @@ function! s:NewCatalogViewer(name, title)
       let l:window_width += l:window_width % 2 ? 1 : 0
       let l:column_1 = float2nr(floor((l:window_width - 4) * 0.4))
       let l:column_2 = float2nr(ceil((l:window_width - 4) * 0.6))
-      " ha ha syntax fail.
       let l:help_text = ['']
       let l:help_text += ['┌' . s:_format_align_center('  Buffergator Help  ', l:window_width, '─') . '┐']
       let l:help_text += ['│' . s:_format_align_center('',l:window_width,' ') . '│']
       echomsg string([l:window_width, l:column_1, l:column_2])
       "
-      for l:command_set in ['buffer_catalog_viewer', 'tab_catalog_viewer', 'global'] 
+      for l:command_set in ['buffer_catalog_viewer', 'tab_catalog_viewer', 'global', 'help'] 
           for l:plug_mapping in keys(s:_default_keymaps[l:command_set])
               if has_key(s:_keymap_help,l:plug_mapping)
                   let l:keys = join(s:_default_keymaps[l:command_set][l:plug_mapping],", ")
                   let l:help = s:_keymap_help[l:plug_mapping] 
+                  " ha ha syntax fail.
                   let l:rows_for_columns = [strlen(l:keys) / l:column_1 + 1, strlen(l:help) / l:column_2 + 1]
                   
                   let l:rows = max(l:rows_for_columns)
@@ -652,8 +659,8 @@ function! s:NewCatalogViewer(name, title)
                   " use a zero width match to avoid remove parts of
                   " the string, and to split multiple times
                   " \(\s[^ ]*\%24c\)\@=
-                  let l:keys_split = split(l:keys,'\v(\s[^ ]*%' . l:column_1 . 'c)@=')
-                  let l:help_split = split(l:help,'\v(\s[^ ]*%' . l:column_2 . 'c)@=')
+                  let l:keys_split = split(l:keys,'\v\s([^ ]*%' . l:column_1 . 'c)@=')
+                  let l:help_split = split(l:help,'\v\s([^ ]*%' . l:column_2 . 'c)@=')
 
                   for l:row in range(l:rows)
                       " use only the matching portion 
@@ -682,8 +689,16 @@ function! s:NewCatalogViewer(name, title)
       highlight link BuffergatorKeys Identifier 
       highlight link BuffergatorHelp String
       setlocal nomodifiable
-      noremap <buffer> <silent> q :q<CR>:wincmd p<CR>
-      noremap <buffer> <silent> ? :q<CR>:wincmd p<CR>
+
+      mapclear <buffer>
+      call self.disable_editing_keymaps()
+      for l:command_set in ['help']
+        for l:command in keys(s:_default_keymaps[l:command_set])
+          for l:sequence in s:_default_keymaps[l:command_set][l:command]
+            execute 'nmap <buffer> ' . l:sequence . ' ' . '<Plug>' . l:command
+          endfor
+        endfor
+      endfor
     endfunction
 
     function! l:catalog_viewer.list_buffers() dict
