@@ -68,26 +68,26 @@ endif
 "
 let s:_default_keymaps = {
       \ 'buffer_catalog_viewer' : {
-        \ 'BuffergatorSelect'           : ['<CR>', 'o'],
+        \ 'BuffergatorSelectDefault'    : ['<CR>', 'o'],
         \ 'BuffergatorCycleSort'        : ['cs'],
         \ 'BuffergatorDelete'           : ['d'],
         \ 'BuffergatorForceDelete'      : ['D'],
         \ 'BuffergatorWipe'             : ['x'],
         \ 'BuffergatorForceWipe'        : ['X'],
-        \ 'BuffergatorSplitVert'        : ['s'],
-        \ 'BuffergatorSplitHorz'        : ['i'],
-        \ 'BuffergatorNewTab'           : ['t'],
-        \ 'BuffergatorSelectGator'      : ['po'],
-        \ 'BuffergatorSplitVertGator'   : ['ps'],
-        \ 'BuffergatorSplitHorzGator'   : ['pi'],
-        \ 'BuffergatorNewTabGator'      : ['pt'],
-        \ 'BuffergatorPreview'          : ['O', 'go'],
+        \ 'BuffergatorSplitVertSwitch'  : ['s'],
+        \ 'BuffergatorSplitHorzSwitch'  : ['i'],
+        \ 'BuffergatorNewTabSwitch'     : ['t'],
+        \ 'BuffergatorSelectKeep'       : ['po'],
+        \ 'BuffergatorSplitVertKeep'    : ['ps'],
+        \ 'BuffergatorSplitHorzKeep'    : ['pi'],
+        \ 'BuffergatorNewTabKeep'       : ['pt'],
+        \ 'BuffergatorPreviewWindow'    : ['O', 'go'],
         \ 'BuffergatorPreviewVertSplit' : ['S', 'gs'],
         \ 'BuffergatorPreviewHorzSplit' : ['I', 'gi'],
         \ 'BuffergatorPreviewTab'       : ['T'],
         \ 'BuffergatorPreviewNext'      : ['<SPACE>', '<C-N>'],
         \ 'BuffergatorPreviewPrevious'  : ['<C-SPACE>', '<C-P>', '<C-@>'],
-        \ 'BuffergatorFind'             : ['E'],
+        \ 'BuffergatorFindOrBust'       : ['E'],
         \ 'BuffergatorFindOrOpen'       : ['eo'],
         \ 'BuffergatorFindOrVSplit'     : ['es'],
         \ 'BuffergatorFindOrHSplit'     : ['ei'],
@@ -113,42 +113,41 @@ let s:_default_keymaps = {
       \},
    \ }
 
-let s:_keymap_help = {
-      \ 'BuffergatorSelect'           : 'Open in previous window',
-      \ 'BuffergatorCycleSort'        : 'Cycle through sort regime',
-      \ 'BuffergatorDelete'           : 'Delete the selected buffer',
-      \ 'BuffergatorWipe'             : 'Wipe the selected buffer',
-      \ 'BuffergatorForceDelete'      : 'Uncondtionally delete the selected buffer',
-      \ 'BuffergatorForceWipe'        : 'Uncondtionally wipe the selected buffer',
-      \ 'BuffergatorSplitVert'        : 'Open in new vertical split',
-      \ 'BuffergatorSplitHorz'        : 'Open in a new split',
-      \ 'BuffergatorNewTab'           : 'Open in a new tab',
-      \ 'BuffergatorSelectGator'      : 'Open in previous window and keep buffergator open',
-      \ 'BuffergatorSplitVertGator'   : 'Open in vertical split and keep buffergator open',
-      \ 'BuffergatorSplitHorzGator'   : 'Open in new split and keep buffergator open',
-      \ 'BuffergatorNewTabGator'      : 'Open in new tab and keep buffergator open',
-      \ 'BuffergatorPreview'          : 'Preview in previous window',
-      \ 'BuffergatorPreviewVertSplit' : 'Preview in a new vertical split',
-      \ 'BuffergatorPreviewHorzSplit' : 'Preview in a new split',
-      \ 'BuffergatorPreviewTab'       : 'Preview in a new tab',
-      \ 'BuffergatorPreviewNext'      : 'Go to next buffer and preview in previous window',
-      \ 'BuffergatorPreviewPrevious'  : 'Go to previus buffer and preview in in previous window',
-      \ 'BuffergatorFind'             : 'Find buffer in an existing window anywhere, and go to it only if it can be found',
-      \ 'BuffergatorFindOrOpen'       : 'Find buffer in an existing window or open in previous',
-      \ 'BuffergatorFindOrVSplit'     : 'Find buffer in an existing window or open in new vertical split',
-      \ 'BuffergatorFindOrHSplit'     : 'Find buffer in an existing window or open in new split',
-      \ 'BuffergatorFindOrTab'        : 'Find buffer in an existing window or open in a new tab',
-      \ 'BuffergatorTabSelect'        : 'Opens tab page or window',
-      \ 'BuffergatorTabNext'          : 'Select the next tab page',
-      \ 'BuffergatorTabPrev'          : 'Select the previous tab page',
-      \ 'BuffergatorTabWinNext'       : 'Select the next tab page window entry',
-      \ 'BuffergatorTabWinPrev'       : 'Select the previous tab page window entry',
-      \ 'BuffergatorCycleDisplay'     : 'Cycle the display regime',
-      \ 'BuffergatorCyclePath'        : 'Cycle the full path display',
-      \ 'BuffergatorZoomWin'          : 'Zoom / unzoom the window',
-      \ 'BuffergatorRebuild'          : 'Update rebuild / refresh the buffers catalog',
-      \ 'BuffergatorQuit'             : 'Quit the buffergator window',
-      \ }
+let s:_keymap_help = [
+   \ ['BuffergatorSelectDefault', 'Open in previous window'],
+   \ ['BuffergatorSplitVert', 'Open in new vertical split'],
+   \ ['BuffergatorSplitHorz', 'Open in a new split'],
+   \ ['BuffergatorNewTab', 'Open in a new tab'],
+   \ ['BuffergatorPreviewWindow', 'Preview in previous window'],
+   \ ['BuffergatorPreviewVertSplit', 'Preview in a new vertical split'],
+   \ ['BuffergatorPreviewHorzSplit', 'Preview in a new split'],
+   \ ['BuffergatorPreviewTab', 'Preview in a new tab'],
+   \ ['BuffergatorPreviewNext', 'Go to next buffer and preview in previous window'],
+   \ ['BuffergatorPreviewPrevious', 'Go to previus buffer and preview in in previous window'],
+   \ ['BuffergatorSelectKeep', 'Open in previous window and keep buffergator open'],
+   \ ['BuffergatorSplitVertKeep', 'Open in vertical split and keep buffergator open'],
+   \ ['BuffergatorSplitHorzKeep', 'Open in new split and keep buffergator open'],
+   \ ['BuffergatorNewTabKeep', 'Open in new tab and keep buffergator open'],
+   \ ['BuffergatorFindOrBust', 'Find buffer in an existing window anywhere, and go to it only if it can be found'],
+   \ ['BuffergatorFindOrOpen', 'Find buffer in an existing window or open in previous'],
+   \ ['BuffergatorFindOrVSplit', 'Find buffer in an existing window or open in new vertical split'],
+   \ ['BuffergatorFindOrHSplit', 'Find buffer in an existing window or open in new split'],
+   \ ['BuffergatorTabSelect', 'Opens tab page or window'],
+   \ ['BuffergatorTabNext', 'Select the next tab page'],
+   \ ['BuffergatorTabPrev', 'Select the previous tab page'],
+   \ ['BuffergatorTabWinNext', 'Select the next tab page window entry'],
+   \ ['BuffergatorTabWinPrev', 'Select the previous tab page window entry'],
+   \ ['BuffergatorCycleSort', 'Cycle through sort regime'],
+   \ ['BuffergatorCycleDisplay', 'Cycle the display regime'],
+   \ ['BuffergatorCyclePath', 'Cycle the full path display'],
+   \ ['BuffergatorZoomWin', 'Zoom / unzoom the window'],
+   \ ['BuffergatorRebuild', 'Update rebuild / refresh the buffers catalog'],
+   \ ['BuffergatorDelete', 'Delete the selected buffer'],
+   \ ['BuffergatorForceDelete', 'Uncondtionally delete the selected buffer'],
+   \ ['BuffergatorWipe', 'Wipe the selected buffer'],
+   \ ['BuffergatorForceWipe', 'Uncondtionally wipe the selected buffer'],
+   \ ['BuffergatorQuit', 'Quit the buffergator window']
+   \ ]
 
 if exists('g:buffergator_keymaps')
   call extend(s:_default_keymaps, g:buffergator_keymaps, 'force')
@@ -167,7 +166,7 @@ noremap <Plug>BuffergatorWipe              :<C-U>call b:buffergator_catalog_view
 noremap <Plug>BuffergatorForceWipe         :<C-U>call b:buffergator_catalog_viewer.delete_target(1, 1)<CR>
 
 """"" Selection                                     :show target and switch focus
-noremap <Plug>BuffergatorSelect            :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
+noremap <Plug>BuffergatorSelectDefault     :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "")<CR>
 noremap <Plug>BuffergatorSplitVert         :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "vert sb")<CR>
 noremap <Plug>BuffergatorSplitHorz         :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "sb")<CR>
 noremap <Plug>BuffergatorNewTab            :<C-U>call b:buffergator_catalog_viewer.visit_target(!g:buffergator_autodismiss_on_select, 0, "tab sb")<CR>
@@ -175,14 +174,14 @@ noremap <Plug>BuffergatorNewTab            :<C-U>call b:buffergator_catalog_view
 
 
 """"" Selection                                     :show target and switch focus, preserving the catalog regardless of the autodismiss setting
-noremap <Plug>BuffergatorSelectGator       :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "")<CR>
-noremap <Plug>BuffergatorSplitVertGator    :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "vert sb")<CR>
-noremap <Plug>BuffergatorSplitHorzGator    :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "sb")<CR>
-noremap <Plug>BuffergatorNewTabGator       :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "tab sb")<CR>
+noremap <Plug>BuffergatorSelectKeep        :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "")<CR>
+noremap <Plug>BuffergatorSplitVertKeep     :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "vert sb")<CR>
+noremap <Plug>BuffergatorSplitHorzKeep     :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "sb")<CR>
+noremap <Plug>BuffergatorNewTabKeep        :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 0, "tab sb")<CR>
 
 
 """"" Preview                                      :show target , keeping focus on catalog
-noremap <Plug>BuffergatorPreview           :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
+noremap <Plug>BuffergatorPreviewWindow     :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "")<CR>
 noremap <Plug>BuffergatorPreviewVertSplit  :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "vert sb")<CR>
 noremap <Plug>BuffergatorPreviewHorzSplit  :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "sb")<CR>
 noremap <Plug>BuffergatorPreviewTab        :<C-U>call b:buffergator_catalog_viewer.visit_target(1, 1, "tab sb")<CR>
@@ -191,7 +190,7 @@ noremap <Plug>BuffergatorPreviewPrevious   :<C-U>call b:buffergator_catalog_view
 
 
 """"" Preview                                       :go to existing window showing target
-noremap <Plug>BuffergatorFind              :<C-U>call b:buffergator_catalog_viewer.visit_open_target(1, !g:buffergator_autodismiss_on_select, "")<CR>
+noremap <Plug>BuffergatorFindOrBust        :<C-U>call b:buffergator_catalog_viewer.visit_open_target(1, !g:buffergator_autodismiss_on_select, "")<CR>
 noremap <Plug>BuffergatorFindOrOpen        :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "")<CR>
 noremap <Plug>BuffergatorFindOrVSplit      :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "vert sb")<CR>
 noremap <Plug>BuffergatorFindOrHSplit      :<C-U>call b:buffergator_catalog_viewer.visit_open_target(0, !g:buffergator_autodismiss_on_select, "sb")<CR>
@@ -210,7 +209,7 @@ noremap <Plug>BuffergatorZoomWin           :call b:buffergator_catalog_viewer.to
 noremap <Plug>BuffergatorShowHelp          :call b:buffergator_catalog_viewer.toggle_help()<CR>
 
 """"" Close the help window
-noremap <Plug>BuffergatorCloseHelp         :q<CR>:wincmd p<CR>
+noremap <Plug>BuffergatorCloseHelp         :call b:buffergator_catalog_viewer.close_help()<CR>
 
 
 " Script Data and Variables {{{1
