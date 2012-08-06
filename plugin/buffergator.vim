@@ -988,7 +988,7 @@ function! s:NewCatalogViewer(name, title)
         
         if self.display_regime == "basename"
             let l:line .= s:_format_align_left(l:bufinfo.basename, self.max_buffer_basename_len, " ")
-            let l:line .= "  "
+            let l:line .= "	"
             let l:line .= l:bufinfo.parentdir
         elseif self.display_regime == "filepath"
             let l:line .= l:bufinfo.filepath
@@ -1415,7 +1415,7 @@ function! s:NewCatalogViewer(name, title)
                   \ fold contains=BuffergatorFileLine transparent 
             syn match BuffergatorBufferNr '\v^\[[[:digit:][:space:]]{3}\]'
                   \ containedin=BuffergatorFileLine,BuffergatorTabArea nextgroup=@BuffergatorEntries
-            syn match BuffergatorPath '\v/.+$' containedin=BuffergatorFileLine
+            syn match BuffergatorPath '\v\s[/~.].+$' containedin=BuffergatorFileLine
         
             for l:buffer_status in reverse(copy(self.symbol_order))
                 let l:name = l:buffer_status
@@ -1427,7 +1427,7 @@ function! s:NewCatalogViewer(name, title)
                 let l:pattern .= s:_buffer_line_symbol_list(l:buffer_status)
                 let l:pattern .= repeat('.', self.symbol_columns - (l:line_symbol[1] + 1))
                 let l:pattern .= ')'
-                let l:pattern .= '.{-}/@='
+                let l:pattern .= '.{-}(\t|$)@='
                 
                 let l:pattern_name = "Buffergator" . toupper(l:name[0]) . tolower(l:name[1:]) . "Entry"
                 let l:element = [
@@ -1519,6 +1519,7 @@ function! s:NewBufferCatalogViewer()
         setlocal modifiable
         call self.claim_buffer()
         call self.clear_buffer()
+        call self.setup_buffer_keymaps()
         call self.setup_buffer_syntax()
         let self.jump_map = {}
         let l:initial_line = 1
@@ -1811,6 +1812,7 @@ function! s:NewTabCatalogViewer()
         call self.claim_buffer()
         call self.clear_buffer()
         call self.setup_buffer_syntax()
+        call self.setup_buffer_keymaps()
         let self.jump_map = {}
         let l:initial_line = 1
         " we always have to add one to tab_index and window_index
